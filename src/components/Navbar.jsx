@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const Navbar = () => {
     return (
         <div className="navbar bg-white shadow-md px-6 lg:px-12 sticky top-0 z-50">
@@ -11,12 +13,7 @@ const Navbar = () => {
                             viewBox="0 0 24 24"
                             stroke="currentColor"
                         >
-                            <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth="2"
-                                d="M4 6h16M4 12h8m-8 6h16"
-                            />
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" />
                         </svg>
                     </div>
                     <ul
@@ -24,10 +21,10 @@ const Navbar = () => {
                         className="menu menu-sm dropdown-content bg-white rounded-box z-50 mt-3 w-52 p-2 shadow-lg"
                     >
                         <li>
-                            <a className="text-gray-700 font-medium">Home</a>
+                            <Link to="/" className="text-gray-700 font-medium">Home</Link>
                         </li>
                         <li>
-                            <a className="text-gray-700 font-medium">All Posts</a>
+                            <Link to="/all-posts" className="text-gray-700 font-medium">All Posts</Link>
                         </li>
                     </ul>
                 </div>
@@ -38,19 +35,22 @@ const Navbar = () => {
                         src="/assets/logo.jpg"
                         alt="Logo"
                     />
-                    <a className="font-bold text-2xl text-gray-800 tracking-wide hover:text-green-600 transition">
+                    <Link
+                        to="/"
+                        className="font-bold text-2xl text-gray-800 tracking-wide hover:text-green-600 transition"
+                    >
                         ShareStep
-                    </a>
+                    </Link>
                 </div>
             </div>
 
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1 gap-6 text-lg font-medium">
                     <li>
-                        <a className="hover:text-green-600 transition">Home</a>
+                        <Link to="/" className="hover:text-green-600 transition">Home</Link>
                     </li>
                     <li>
-                        <a className="hover:text-green-600 transition">All Posts</a>
+                        <Link to="/all-posts" className="hover:text-green-600 transition">All Posts</Link>
                     </li>
                 </ul>
             </div>
@@ -68,14 +68,27 @@ const Navbar = () => {
                         className="menu menu-sm dropdown-content bg-white rounded-box z-50 mt-3 w-52 p-2 shadow-lg"
                     >
                         <li>
-                            <button className="text-gray-700 hover:text-green-600">
+                            <Link to="/add-post" className="text-gray-700 hover:text-green-600">
                                 Add Volunteer Post
-                            </button>
+                            </Link>
                         </li>
-                        <li>
-                            <button className="text-gray-700 hover:text-green-600">
-                                Manage My Posts
-                            </button>
+
+                        <li tabIndex={0}>
+                            <details>
+                                <summary className="text-gray-700 hover:text-green-600">Manage My Posts</summary>
+                                <ul className="p-2 bg-white rounded-lg shadow-md">
+                                    <li>
+                                        <Link to="/my-volunteer-posts" className="text-gray-700 hover:text-green-600">
+                                            My Volunteer Need Post
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link to="/my-request-posts" className="text-gray-700 hover:text-green-600">
+                                            My Volunteer Request Post
+                                        </Link>
+                                    </li>
+                                </ul>
+                            </details>
                         </li>
                     </ul>
                 </div>
@@ -98,16 +111,16 @@ const Navbar = () => {
                         className="menu menu-sm dropdown-content bg-white rounded-box z-50 mt-3 w-52 p-2 shadow-lg"
                     >
                         <li>
-                            <a className="text-gray-700 hover:text-green-600">Settings</a>
+                            <Link to="/settings" className="text-gray-700 hover:text-green-600">Settings</Link>
                         </li>
                         <li>
-                            <a className="text-gray-700 hover:text-green-600">Logout</a>
+                            <Link to="/logout" className="text-gray-700 hover:text-green-600">Logout</Link>
                         </li>
                     </ul>
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default Navbar
+export default Navbar;
