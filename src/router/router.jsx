@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import RootLayout from "../RootLayout/RootLayout";
 import ErrorPage from "../pages/ErrorPage";
 import Home from "../components/Home";
+import SwiperComponent from "../components/SwiperComponent";
 
 export const router = createBrowserRouter([
     {
@@ -11,7 +12,8 @@ export const router = createBrowserRouter([
         children: [
             {
                 path: "/",
-                element: <Home></Home>
+                // element: <Home></Home>
+                element: <SwiperComponent></SwiperComponent>
             }
         ]
     }
