@@ -1,11 +1,13 @@
 import React from 'react';
 import { MapPin, Users, Tag, User } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const VolunteerCard = ({ post }) => {
 
     const cardData = post;
     const { _id, thumbnailUrl, title, description, category, location, volunteersNeeded, organizerName } = cardData;
 
+    const navigate = useNavigate();
     const handleImageError = (e) => {
         e.target.src = "https://i.ibb.co.com/7tQmRxYj/error-alert-failure-icon-problem-concept.jpg";
     };
@@ -69,7 +71,7 @@ const VolunteerCard = ({ post }) => {
 
                     <div className="flex">
                         <button
-                            onClick={() => console.log(`View details for ${_id}`)}
+                            onClick={() => navigate(`/volunteer-posts/${_id}`)}
                             className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl"
                         >
                             Join This Mission

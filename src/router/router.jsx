@@ -9,6 +9,7 @@ import AddVolunteerPost from "../components/AddVolunteerNeedPost";
 import Allpost from "../components/Allpost";
 import Login from "../pages/Authentication/Login";
 import Registration from "../pages/Authentication/Register";
+import VolunteerDetails from "../pages/VolunteerDetails";
 
 
 export const router = createBrowserRouter([
@@ -36,6 +37,11 @@ export const router = createBrowserRouter([
             {
                 path: "/add-volunteer-post",
                 element: <AddVolunteerPost></AddVolunteerPost>
+            },
+            {
+                path: "/volunteer-posts/:id",
+                element: <VolunteerDetails></VolunteerDetails>
+
             }
         ]
     }
