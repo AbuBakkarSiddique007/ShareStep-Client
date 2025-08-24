@@ -2,12 +2,12 @@ import axios from "axios";
 import { useContext, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import toast from "react-hot-toast";
+import toast, { Toaster } from 'react-hot-toast';
 import { AuthContext } from "../providers/AuthProvider";
 
 const AddVolunteerPost = () => {
 
-    const {user} = useContext(AuthContext)
+    const { user } = useContext(AuthContext)
     const [startDate, setStartDate] = useState(new Date())
 
     const handleAddPost = async (e) => {
@@ -39,8 +39,9 @@ const AddVolunteerPost = () => {
         try {
             const { data } = await axios.post(`${import.meta.env.VITE_API_URL}/add-volunteer-post`, formData);
             console.log("Post added successfully:", data);
-            toast.success("Post added successfully!");
+            
             form.reset();
+            toast.success("Post added successfully!");
         } catch (error) {
             console.error("Error in the adding post:", error);
             toast.error("Error in the adding post");
@@ -123,6 +124,7 @@ const AddVolunteerPost = () => {
 
                 <div className='flex flex-col gap-2'>
                     <label className='text-gray-700 font-medium'>Deadline</label>
+
                     <DatePicker
                         className='border border-gray-300 p-2 rounded-xl shadow-sm w-full focus:outline-none focus:ring focus:ring-purple-200 transition duration-300'
                         name="deadline"
