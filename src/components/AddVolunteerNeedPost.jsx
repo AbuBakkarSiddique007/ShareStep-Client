@@ -1,14 +1,16 @@
-
-import { useState } from "react";
+import axios from "axios";
+import { useContext, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import toast from "react-hot-toast";
+import { AuthContext } from "../providers/AuthProvider";
 
 const AddVolunteerPost = () => {
 
+    const {user} = useContext(AuthContext)
     const [startDate, setStartDate] = useState(new Date())
-    const handleAddPost = (e) => {
 
-
+    const handleAddPost = async (e) => {
         e.preventDefault();
         const form = e.target;
         const thumbnailUrl = form.thumbnailUrl.value;
@@ -34,7 +36,16 @@ const AddVolunteerPost = () => {
         };
         console.log(formData);
 
-        alert("Post Added (Dummy)!");
+        try {
+            const { data } = await axios.post(`${import.meta.env.VITE_API_URL}/add-volunteer-post`, formData);
+            console.log("Post added successfully:", data);
+            toast.success("Post added successfully!");
+            form.reset();
+        } catch (error) {
+            console.error("Error in the adding post:", error);
+            toast.error("Error in the adding post");
+        }
+
     };
 
     return (
@@ -110,21 +121,11 @@ const AddVolunteerPost = () => {
                     />
                 </div>
 
-                {/* <div>
-                    <label className="block font-semibold mb-1">Deadline</label>
-                    <input
-                        type="date"
-                        name="deadline"
-                        className="w-full p-2 border rounded-lg"
-                        required
-                    />
-                </div> */}
                 <div className='flex flex-col gap-2'>
                     <label className='text-gray-700 font-medium'>Deadline</label>
-
-                    {/* Date Picker Input Field */}
                     <DatePicker
                         className='border border-gray-300 p-2 rounded-xl shadow-sm w-full focus:outline-none focus:ring focus:ring-purple-200 transition duration-300'
+                        name="deadline"
                         selected={startDate}
                         onChange={date => setStartDate(date)}
                     />
@@ -137,6 +138,11 @@ const AddVolunteerPost = () => {
                             type="text"
                             name="organizerName"
                             className="w-full p-2 border rounded-lg bg-gray-100"
+
+                            defaultValue={user?.displayName}
+                            readOnly
+                            required
+
                         />
                     </div>
                     <div>
@@ -145,6 +151,9 @@ const AddVolunteerPost = () => {
                             type="email"
                             name="organizerEmail"
                             className="w-full p-2 border rounded-lg bg-gray-100"
+                            defaultValue={user?.email}
+                            readOnly
+                            required
                         />
                     </div>
                 </div>
