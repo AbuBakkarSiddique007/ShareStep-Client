@@ -1,11 +1,10 @@
-import React from 'react';
-import { MapPin, Users, Tag, User } from 'lucide-react';
+import { Tag } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
-const VolunteerCard = ({ post, showDeadline }) => {
+const VolunteerCard = ({ post }) => {
 
     const cardData = post;
-    const { _id, thumbnailUrl, title, description, category, location, volunteersNeeded, organizerName, deadline } = cardData;
+    const { _id, thumbnailUrl, title, category, deadline } = cardData;
 
     const navigate = useNavigate();
     const handleImageError = (e) => {
@@ -27,61 +26,31 @@ const VolunteerCard = ({ post, showDeadline }) => {
     return (
         <div className="max-w-sm mx-auto">
             <div className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl hover:scale-105 transition-all duration-300 border border-gray-100">
-                <div className="relative">
-                    <img
-                        src={thumbnailUrl}
-                        alt={title || "Volunteer opportunity"}
-                        className="w-full h-56 object-cover"
-                        onError={handleImageError}
-                    />
-                    <div className="absolute top-3 left-3">
+                <img
+                    src={thumbnailUrl}
+                    alt={title || "Volunteer opportunity"}
+                    className="w-full h-56 object-cover"
+                    onError={handleImageError}
+                />
+                <div className="p-6 flex flex-col gap-3">
+                    <h3 className="text-xl font-bold text-gray-900 mb-1 line-clamp-2 leading-tight">
+                        {title}
+                    </h3>
+                    <div className="flex items-center gap-2 mb-1">
                         <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium ${getCategoryColor(category)}`}>
                             <Tag size={12} className="mr-1" />
                             {category}
                         </span>
-                    </div>
-                    <div className="absolute top-3 right-3">
-                        <span className="bg-white/90 backdrop-blur-sm text-gray-700 px-2 py-1 rounded-full text-xs font-semibold flex items-center">
-                            <Users size={12} className="mr-1" />
-                            {volunteersNeeded} needed
+                        <span className="inline-block bg-indigo-600 text-white px-3 py-1 rounded-full text-xs font-semibold">
+                            Deadline: {deadline}
                         </span>
                     </div>
-                    {showDeadline && (
-                        <div className="absolute bottom-3 left-3 bg-indigo-600 text-white px-3 py-1 rounded-full text-xs font-semibold shadow">
-                            Deadline: {deadline}
-                        </div>
-                    )}
-                </div>
-
-                <div className="p-6">
-                    <h3 className="text-xl font-bold text-gray-900 mb-2 line-clamp-2 leading-tight">
-                        {title}
-                    </h3>
-
-                    <div className="flex items-center text-gray-600 mb-3">
-                        <MapPin size={14} className="mr-2 text-gray-400" />
-                        <span className="text-sm truncate">{location}</span>
-                    </div>
-
-                    <p className="text-gray-600 text-sm leading-relaxed mb-4 line-clamp-3">
-                        {description}
-                    </p>
-
-                    <div className="flex items-center justify-between mb-5">
-                        <div className="flex items-center text-gray-500">
-                            <User size={14} className="mr-2" />
-                            <span className="text-xs">by {organizerName}</span>
-                        </div>
-                    </div>
-
-                    <div className="flex">
-                        <button
-                            onClick={() => navigate(`/volunteer-posts/${_id}`)}
-                            className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl"
-                        >
-                            Join This Mission
-                        </button>
-                    </div>
+                    <button
+                        onClick={() => navigate(`/volunteer-posts/${_id}`)}
+                        className="w-full mt-2 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl"
+                    >
+                        View Details
+                    </button>
                 </div>
             </div>
         </div>

@@ -39,8 +39,8 @@ const AddVolunteerPost = () => {
         try {
             const { data } = await axios.post(`${import.meta.env.VITE_API_URL}/add-volunteer-post`, formData);
             console.log("Post added successfully:", data);
-            
-            form.reset();
+
+            // form.reset();
             toast.success("Post added successfully!");
         } catch (error) {
             console.error("Error in the adding post:", error);
