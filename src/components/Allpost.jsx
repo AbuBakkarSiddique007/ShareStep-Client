@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import VolunteerCard from '../pages/volunteerCard';
 import axios from 'axios';
+import VolunteerCard from '../pages/VolunteerCard';
 
 const Allpost = () => {
     const [posts, setPosts] = useState([]);
@@ -64,7 +64,10 @@ const Allpost = () => {
             {filteredPosts.length > 0 ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                     {filteredPosts.map(post => (
-                        <VolunteerCard key={post._id} post={post} />
+                        <VolunteerCard
+                            key={post._id} post={post}
+                        >
+                        </VolunteerCard>
                     ))}
                 </div>
             ) : (

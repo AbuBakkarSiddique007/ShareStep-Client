@@ -2,10 +2,10 @@ import React from 'react';
 import { MapPin, Users, Tag, User } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
-const VolunteerCard = ({ post }) => {
+const VolunteerCard = ({ post, showDeadline }) => {
 
     const cardData = post;
-    const { _id, thumbnailUrl, title, description, category, location, volunteersNeeded, organizerName } = cardData;
+    const { _id, thumbnailUrl, title, description, category, location, volunteersNeeded, organizerName, deadline } = cardData;
 
     const navigate = useNavigate();
     const handleImageError = (e) => {
@@ -46,6 +46,11 @@ const VolunteerCard = ({ post }) => {
                             {volunteersNeeded} needed
                         </span>
                     </div>
+                    {showDeadline && (
+                        <div className="absolute bottom-3 left-3 bg-indigo-600 text-white px-3 py-1 rounded-full text-xs font-semibold shadow">
+                            Deadline: {deadline}
+                        </div>
+                    )}
                 </div>
 
                 <div className="p-6">
